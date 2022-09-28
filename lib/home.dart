@@ -31,6 +31,28 @@ class home extends StatelessWidget {
           )
         ],
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.grey,
+        onPressed: () {},
+        child: Container(
+          margin: EdgeInsets.all(15.0),
+          child: Icon(Icons.qr_code_scanner),
+        ),
+        elevation: 4.0,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            label: 'Profile',
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Container(
           color: Colors.white,
@@ -79,7 +101,7 @@ class home extends StatelessWidget {
                             Container(
                               width: 200,
                               child: Card(
-                                color: Colors.blue,
+                                color: Color.fromARGB(255, 194, 196, 199),
                                 child: Column(children: [
                                   Container(
                                     child: Column(
@@ -111,7 +133,7 @@ class home extends StatelessWidget {
                             Container(
                               width: 200,
                               child: Card(
-                                color: Colors.blue,
+                                color: Color.fromARGB(255, 194, 196, 199),
                                 child: Column(children: [
                                   Container(
                                     child: Column(
@@ -144,7 +166,7 @@ class home extends StatelessWidget {
                       ],
                     )),
                 Container(
-                  height: 20,
+                  height: 10,
                 ),
                 Container(
                   padding: EdgeInsets.all(10),
@@ -466,10 +488,10 @@ class home extends StatelessWidget {
                   ]),
                 ),
                 Container(
-                  height: 20,
+                  height: 10,
                 ),
                 Container(
-                    color: Color.fromARGB(255, 92, 115, 122),
+                    color: Color.fromARGB(255, 194, 196, 199),
                     width: 600,
                     height: 80,
                     child: Row(
@@ -503,7 +525,7 @@ class home extends StatelessWidget {
                         Container(
                           child: Icon(Icons.phone,
                               size: 50, color: Color.fromARGB(255, 0, 0, 0)),
-                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                          padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                         ),
                       ],
                     )),
