@@ -1,9 +1,15 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_tugas/home.dart';
 
 void main() {
   runApp(const MyApp());
 }
+
+TextEditingController getUser = new TextEditingController();
+TextEditingController getPass = new TextEditingController();
+final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -34,6 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
           title: Center(
         child: Text(widget.title),
@@ -75,6 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TextField(
+                        controller: getUser,
                         decoration: InputDecoration(
                             contentPadding:
                                 EdgeInsets.symmetric(horizontal: 10),
@@ -84,6 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         height: 10,
                       ),
                       TextField(
+                        controller: getPass,
                         decoration: InputDecoration(
                             contentPadding:
                                 EdgeInsets.symmetric(horizontal: 10),
@@ -106,10 +115,40 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                             ),
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => home()));
+                              String user = 'adi';
+                              String pass = '1234';
+                              
+                              if (getUser.text.length == 0) {
+                                final errorUser = SnackBar(
+                                  content: Text('Username tidak boleh kosong!'),
+                                  duration: Duration(seconds: 2),
+                                );
+                              } else if (getPass.text.length == 0) {
+                                final errorUser = SnackBar(
+                                  content: Text('Password tidak boleh kosong!'),
+                                  duration: Duration(seconds: 2),
+                                );
+                              } else if (getUser.text == user &&
+                                  getPass.text == pass) {
+                                final errorUser = SnackBar(
+                                  content: Text(
+                                      'Selamat datang user: ' + getUser.text),
+                                  duration: Duration(seconds: 2),
+                                );
+
+                                //delay to Home page
+                                Timer(Duration(seconds: 0), () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => home()));
+                                });
+                              } else {
+                                final errorUser = SnackBar(
+                                  content: Text('Cek kembali input anda!'),
+                                  duration: Duration(seconds: 2),
+                                );
+                              }
                             },
                             child: Text(
                               "Login",
