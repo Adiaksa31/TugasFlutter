@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_tugas/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Tugas',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.blueGrey,
       ),
       debugShowCheckedModeBanner: false,
       home: const MyHomePage(title: 'Koperasi Undiksha'),
@@ -57,15 +58,16 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: double.infinity,
                   // color: Colors.white,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 255, 255, 255),
                     borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        bottomLeft: Radius.circular(20)),
+                      topLeft: Radius.circular(20),
+                      bottomLeft: Radius.circular(20),
+                    ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black,
+                        color: Color.fromARGB(255, 145, 141, 141),
                         // spreadRadius: 5,
-                        offset: Offset(-3, -3), // changes position of shadow
+                        offset: Offset(-3, 3), // changes position of shadow
                       ),
                     ],
                   ),
@@ -107,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => MyApp()));
+                                      builder: (context) => home()));
                             },
                             child: Text(
                               "Login",
@@ -145,16 +147,16 @@ class _MyHomePageState extends State<MyHomePage> {
                             ]),
                       ),
                       Container(
-                        height: 20,
+                        height: 5,
                       ),
                     ],
                   ),
                 ),
                 Container(
-                  height: 30,
+                  height: 49,
                 ),
                 Container(
-                    color: Color.fromARGB(255, 86, 88, 84),
+                    color: Color.fromARGB(255, 92, 115, 122),
                     width: 600,
                     height: 40,
                     child: Center(
