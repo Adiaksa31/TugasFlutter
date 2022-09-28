@@ -92,6 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         height: 10,
                       ),
                       TextField(
+                        obscureText: true,
                         controller: getPass,
                         decoration: InputDecoration(
                             contentPadding:
@@ -117,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             onPressed: () {
                               String user = 'adi';
                               String pass = '1234';
-                              
+
                               if (getUser.text.length == 0) {
                                 final errorUser = SnackBar(
                                   content: Text('Username tidak boleh kosong!'),
