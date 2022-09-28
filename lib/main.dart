@@ -37,6 +37,9 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Center(
         child: Text(widget.title),
       )),
+      body: Center(
+        child: Text('data'),
+      ),
     );
   }
 }
