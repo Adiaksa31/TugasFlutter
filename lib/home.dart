@@ -190,6 +190,7 @@ class home extends StatelessWidget {
                     ),
                   ),
                   child: Column(children: [
+                    
                     Container(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
