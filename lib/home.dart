@@ -6,31 +6,35 @@ class home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text("Koperasi Undiksha"),
-        ),
-        actions: <Widget>[
-          PopupMenuButton(
-            itemBuilder: (BuildContext context) {
-              return [
-                PopupMenuItem(
-                    child: InkWell(
-                  onTap: () => {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => MyApp())),
-                  },
-                  child: Row(
-                    children: <Widget>[Text("Logout")],
-                  ),
-                ))
-              ];
-            },
-            icon: Icon(Icons.logout, color: Color.fromARGB(255, 255, 255, 255)),
-          )
-        ],
+    final MediaQueryHeight = MediaQuery.of(context).size.height;
+    final MediaQueryWidth = MediaQuery.of(context).size.width;
+    final myAppBar = AppBar(
+      title: Center(
+        child: Text("Koperasi Undiksha"),
       ),
+      actions: <Widget>[
+        PopupMenuButton(
+          itemBuilder: (BuildContext context) {
+            return [
+              PopupMenuItem(
+                  child: InkWell(
+                onTap: () => {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => MyApp())),
+                },
+                child: Row(
+                  children: <Widget>[Text("Logout")],
+                ),
+              ))
+            ];
+          },
+          icon: Icon(Icons.logout, color: Color.fromARGB(255, 255, 255, 255)),
+        )
+      ],
+    );
+
+    return Scaffold(
+      appBar: myAppBar,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.grey,
@@ -91,7 +95,7 @@ class home extends StatelessWidget {
                             child: Container(
                               child: Image.asset(
                                 "img/1.jpg",
-                                height: 100,
+                                height: MediaQueryHeight * 0.1,
                               ),
                             ),
                           ),
@@ -190,7 +194,6 @@ class home extends StatelessWidget {
                     ),
                   ),
                   child: Column(children: [
-                    
                     Container(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
