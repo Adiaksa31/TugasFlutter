@@ -1,14 +1,22 @@
 # flutter_application_tugas
 
-A new Flutter project.
+Project Bank Undiksha by Adiaksa x LD'O Corporate
 
-Layout Login.
+Layout Mobile Portrait
 
-![Screenshot (38)](https://user-images.githubusercontent.com/93781731/192748690-2a8feacc-225f-4505-80f1-51d06eddffe8.png)
+![Screenshot (62)](https://user-images.githubusercontent.com/93781731/196048038-576dda13-cac4-4939-b58a-8770e1b1c098.png) ![Screenshot (67)](https://user-images.githubusercontent.com/93781731/196048097-5a5e3fa3-4baa-49f2-83a6-8f29343b1916.png)
 
-Layout Home
+Layout Mobile Landscape
 
-![Screenshot (39)](https://user-images.githubusercontent.com/93781731/192748740-e5e4bcfc-327a-43b2-a40c-85dbc4811bc0.png)
+![Screenshot (63)](https://user-images.githubusercontent.com/93781731/196048067-74e0040a-5022-4a6d-867f-98c8cfcbdf3b.png)
+![Screenshot (68)](https://user-images.githubusercontent.com/93781731/196048173-19c5c41c-2c8e-4916-91d1-821dddd91fa4.png)
+
+Layout Dekstop
+
+![Screenshot (69)](https://user-images.githubusercontent.com/93781731/196048226-00d941c0-af6a-4bc6-9e77-fd69a8f22bad.png)
+![Screenshot (70)](https://user-images.githubusercontent.com/93781731/196048213-d99a0698-8205-4fe0-8ccd-d0f32301def8.png)
+  
+
 
 ## Getting Started
 
