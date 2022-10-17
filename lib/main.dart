@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_tugas/home.dart';
 
@@ -46,6 +46,16 @@ class _MyHomePageState extends State<MyHomePage> {
     title: Text('Login Failed'),
     content: Text('Try to Check your Username or Password'),
   );
+
+  void _showAlertDialog(BuildContext context) {
+    showCupertinoModalPopup<void>(
+      context: context,
+      builder: (BuildContext context) => CupertinoAlertDialog(
+        title: const Text('Login Failed'),
+        content: const Text('Try to Check your Username or Password'),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -135,8 +145,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ),
                                 ),
                                 onPressed: () {
-                                  if (getUser.text == '1' &&
-                                      getPass.text == '1') {
+                                  if (getUser.text == 'adi@gmail.com' &&
+                                      getPass.text == '2015051032') {
                                     Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
@@ -315,8 +325,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ),
                                 ),
                                 onPressed: () {
-                                  if (getUser.text == '1' &&
-                                      getPass.text == '1') {
+                                  if (getUser.text == 'adi@gmail.com' &&
+                                      getPass.text == '2015051032') {
                                     Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
