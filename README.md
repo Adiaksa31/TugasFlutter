@@ -2,7 +2,7 @@
 
 Project Bank Undiksha by Adiaksa x LD'O Corporate
 
-Layout Login
+Layout mobile Portrait
 ![Screenshot (69)](https://user-images.githubusercontent.com/93781731/196048226-00d941c0-af6a-4bc6-9e77-fd69a8f22bad.png)
 ![Screenshot (62)](https://user-images.githubusercontent.com/93781731/196048038-576dda13-cac4-4939-b58a-8770e1b1c098.png) ![Screenshot (63)](https://user-images.githubusercontent.com/93781731/196048067-74e0040a-5022-4a6d-867f-98c8cfcbdf3b.png)
 
