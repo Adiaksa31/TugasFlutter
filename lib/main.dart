@@ -145,8 +145,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ),
                                 ),
                                 onPressed: () {
-                                  if (getUser.text == 'adi@gmail.com' &&
-                                      getPass.text == '2015051032') {
+                                  if (getUser.text == '' &&
+                                      getPass.text == '') {
                                     Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
@@ -325,8 +325,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ),
                                 ),
                                 onPressed: () {
-                                  if (getUser.text == 'adi@gmail.com' &&
-                                      getPass.text == '2015051032') {
+                                  if (getUser.text == '' &&
+                                      getPass.text == '') {
                                     Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(

@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_tugas/cek_saldo.dart';
+import 'package:flutter_application_tugas/deposito.dart';
 import 'package:flutter_application_tugas/main.dart';
+import 'package:flutter_application_tugas/mutasi.dart';
+import 'package:flutter_application_tugas/pembayaran.dart';
+import 'package:flutter_application_tugas/pinjaman.dart';
+import 'package:flutter_application_tugas/transfer.dart';
 
 class home extends StatelessWidget {
   const home({Key? key}) : super(key: key);
@@ -208,7 +214,7 @@ class home extends StatelessWidget {
                               height: MediaQueryHeight * 0.01,
                             ),
                             Container(
-                              height: MediaQueryHeight * 0.83,
+                              height: MediaQueryHeight * 0.38,
                               padding: EdgeInsets.all(10),
                               width: double.infinity,
                               // color: Colors.white,
@@ -230,329 +236,314 @@ class home extends StatelessWidget {
                                   Radius.circular(10),
                                 ),
                               ),
-                              child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      padding: EdgeInsets.all(5),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Container(
-                                            height: MediaQueryHeight * 0.35,
-                                            width: MediaQueryWidth * 0.3,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                              color: Colors.white,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.5),
-                                                  spreadRadius: 5,
-                                                  blurRadius: 7,
-                                                  offset: Offset(0, 3),
-                                                ),
-                                              ],
+                              child: GridView.count(
+                                  padding: EdgeInsets.all(5),
+                                  crossAxisCount: 6,
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.all(10),
+                                      child: Container(
+                                        height: MediaQueryHeight * 0.15,
+                                        width: MediaQueryWidth * 0.25,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
+                                              spreadRadius: 5,
+                                              blurRadius: 7,
+                                              offset: Offset(0, 3),
                                             ),
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  child: Icon(Icons.wallet,
-                                                      size: 85,
-                                                      color: Color.fromARGB(
-                                                          255, 0, 0, 0)),
-                                                ),
-                                                Container(
-                                                  child: TextButton(
-                                                    onPressed: () {
-                                                      Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder:
-                                                                  (context) =>
-                                                                      home()));
-                                                    },
-                                                    child: Text(
-                                                      "Cek Saldo",
-                                                      style: TextStyle(
-                                                        fontSize: 35,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Color.fromARGB(
-                                                            255, 7, 7, 7),
-                                                      ),
-                                                    ),
+                                          ],
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              child: Icon(Icons.wallet,
+                                                  size: 50,
+                                                  color: Color.fromARGB(
+                                                      255, 0, 0, 0)),
+                                            ),
+                                            Container(
+                                              child: TextButton(
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              CekSaldo()));
+                                                },
+                                                child: Text(
+                                                  "Cek Saldo",
+                                                  style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Color.fromARGB(
+                                                        255, 7, 7, 7),
                                                   ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                          Container(
-                                            height: MediaQueryHeight * 0.35,
-                                            width: MediaQueryWidth * 0.3,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                              color: Colors.white,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.5),
-                                                  spreadRadius: 5,
-                                                  blurRadius: 7,
-                                                  offset: Offset(0, 3),
                                                 ),
-                                              ],
-                                            ),
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  child: Icon(
-                                                      Icons.monetization_on,
-                                                      size: 85,
-                                                      color: Color.fromARGB(
-                                                          255, 0, 0, 0)),
-                                                ),
-                                                Container(
-                                                  child: TextButton(
-                                                    onPressed: () {
-                                                      Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder:
-                                                                  (context) =>
-                                                                      home()));
-                                                    },
-                                                    child: Text(
-                                                      "Transfer",
-                                                      style: TextStyle(
-                                                        fontSize: 35,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Color.fromARGB(
-                                                            255, 7, 7, 7),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                          Container(
-                                            height: MediaQueryHeight * 0.35,
-                                            width: MediaQueryWidth * 0.3,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                              color: Colors.white,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.5),
-                                                  spreadRadius: 5,
-                                                  blurRadius: 7,
-                                                  offset: Offset(0, 3),
-                                                ),
-                                              ],
-                                            ),
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  child: Icon(Icons.money,
-                                                      size: 85,
-                                                      color: Color.fromARGB(
-                                                          255, 0, 0, 0)),
-                                                ),
-                                                Container(
-                                                  child: TextButton(
-                                                    onPressed: () {
-                                                      Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder:
-                                                                  (context) =>
-                                                                      home()));
-                                                    },
-                                                    child: Text(
-                                                      "Deposit",
-                                                      style: TextStyle(
-                                                        fontSize: 35,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Color.fromARGB(
-                                                            255, 7, 7, 7),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ],
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                    Container(
-                                      padding: EdgeInsets.all(5),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Container(
-                                            height: MediaQueryHeight * 0.35,
-                                            width: MediaQueryWidth * 0.3,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                              color: Colors.white,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.5),
-                                                  spreadRadius: 5,
-                                                  blurRadius: 7,
-                                                  offset: Offset(0, 3),
-                                                ),
-                                              ],
+                                    Padding(
+                                      padding: const EdgeInsets.all(10),
+                                      child: Container(
+                                        height: MediaQueryHeight * 0.15,
+                                        width: MediaQueryWidth * 0.25,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
+                                              spreadRadius: 5,
+                                              blurRadius: 7,
+                                              offset: Offset(0, 3),
                                             ),
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  child: Icon(Icons.credit_card,
-                                                      size: 85,
-                                                      color: Color.fromARGB(
-                                                          255, 0, 0, 0)),
-                                                ),
-                                                Container(
-                                                  child: TextButton(
-                                                    onPressed: () {
-                                                      Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder:
-                                                                  (context) =>
-                                                                      home()));
-                                                    },
-                                                    child: Text(
-                                                      "Pembayaran",
-                                                      style: TextStyle(
-                                                        fontSize: 35,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Color.fromARGB(
-                                                            255, 7, 7, 7),
-                                                      ),
-                                                    ),
+                                          ],
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              child: Icon(Icons.monetization_on,
+                                                  size: 50,
+                                                  color: Color.fromARGB(
+                                                      255, 0, 0, 0)),
+                                            ),
+                                            Container(
+                                              child: TextButton(
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              Transfer()));
+                                                },
+                                                child: Text(
+                                                  "Transfer",
+                                                  style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Color.fromARGB(
+                                                        255, 7, 7, 7),
                                                   ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                          Container(
-                                            height: MediaQueryHeight * 0.35,
-                                            width: MediaQueryWidth * 0.3,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                              color: Colors.white,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.5),
-                                                  spreadRadius: 5,
-                                                  blurRadius: 7,
-                                                  offset: Offset(0, 3),
                                                 ),
-                                              ],
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(10),
+                                      child: Container(
+                                        height: MediaQueryHeight * 0.15,
+                                        width: MediaQueryWidth * 0.25,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
+                                              spreadRadius: 5,
+                                              blurRadius: 7,
+                                              offset: Offset(0, 3),
                                             ),
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  child: Icon(
-                                                      Icons.attach_money,
-                                                      size: 85,
-                                                      color: Color.fromARGB(
-                                                          255, 0, 0, 0)),
-                                                ),
-                                                Container(
-                                                  child: TextButton(
-                                                    onPressed: () {
-                                                      Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder:
-                                                                  (context) =>
-                                                                      home()));
-                                                    },
-                                                    child: Text(
-                                                      "Pinjaman",
-                                                      style: TextStyle(
-                                                        fontSize: 35,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Color.fromARGB(
-                                                            255, 7, 7, 7),
-                                                      ),
-                                                    ),
+                                          ],
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              child: Icon(Icons.money,
+                                                  size: 50,
+                                                  color: Color.fromARGB(
+                                                      255, 0, 0, 0)),
+                                            ),
+                                            Container(
+                                              child: TextButton(
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              Deposito()));
+                                                },
+                                                child: Text(
+                                                  "Deposit",
+                                                  style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Color.fromARGB(
+                                                        255, 7, 7, 7),
                                                   ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                          Container(
-                                            height: MediaQueryHeight * 0.35,
-                                            width: MediaQueryWidth * 0.3,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                              color: Colors.white,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.5),
-                                                  spreadRadius: 5,
-                                                  blurRadius: 7,
-                                                  offset: Offset(0, 3),
                                                 ),
-                                              ],
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(10),
+                                      child: Container(
+                                        height: MediaQueryHeight * 0.15,
+                                        width: MediaQueryWidth * 0.25,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
+                                              spreadRadius: 5,
+                                              blurRadius: 7,
+                                              offset: Offset(0, 3),
                                             ),
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  child: Icon(
-                                                      Icons.insert_chart,
-                                                      size: 85,
-                                                      color: Color.fromARGB(
-                                                          255, 0, 0, 0)),
-                                                ),
-                                                Container(
-                                                  child: TextButton(
-                                                    onPressed: () {
-                                                      Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder:
-                                                                  (context) =>
-                                                                      home()));
-                                                    },
-                                                    child: Text(
-                                                      "mutasi",
-                                                      style: TextStyle(
-                                                        fontSize: 35,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Color.fromARGB(
-                                                            255, 7, 7, 7),
-                                                      ),
-                                                    ),
+                                          ],
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              child: Icon(Icons.credit_card,
+                                                  size: 50,
+                                                  color: Color.fromARGB(
+                                                      255, 0, 0, 0)),
+                                            ),
+                                            Container(
+                                              child: TextButton(
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              Pembayaran()));
+                                                },
+                                                child: Text(
+                                                  "Pembayaran",
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Color.fromARGB(
+                                                        255, 7, 7, 7),
                                                   ),
-                                                )
-                                              ],
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(10),
+                                      child: Container(
+                                        height: MediaQueryHeight * 0.15,
+                                        width: MediaQueryWidth * 0.25,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
+                                              spreadRadius: 5,
+                                              blurRadius: 7,
+                                              offset: Offset(0, 3),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              child: Icon(Icons.attach_money,
+                                                  size: 50,
+                                                  color: Color.fromARGB(
+                                                      255, 0, 0, 0)),
+                                            ),
+                                            Container(
+                                              child: TextButton(
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              Pinjaman()));
+                                                },
+                                                child: Text(
+                                                  "Pinjaman",
+                                                  style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Color.fromARGB(
+                                                        255, 7, 7, 7),
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(10),
+                                      child: Container(
+                                        height: MediaQueryHeight * 0.15,
+                                        width: MediaQueryWidth * 0.25,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
+                                              spreadRadius: 5,
+                                              blurRadius: 7,
+                                              offset: Offset(0, 3),
+                                            ),
+                                          ],
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              child: Icon(Icons.insert_chart,
+                                                  size: 50,
+                                                  color: Color.fromARGB(
+                                                      255, 0, 0, 0)),
+                                            ),
+                                            Container(
+                                              child: TextButton(
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              Mutasi()));
+                                                },
+                                                child: Text(
+                                                  "mutasi",
+                                                  style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Color.fromARGB(
+                                                        255, 7, 7, 7),
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ]),
@@ -759,7 +750,7 @@ class home extends StatelessWidget {
                               height: MediaQueryHeight * 0.01,
                             ),
                             Container(
-                              height: MediaQueryHeight * 0.37,
+                              height: MediaQueryHeight * 0.35,
                               padding: EdgeInsets.all(10),
                               width: double.infinity,
                               // color: Colors.white,
@@ -781,329 +772,314 @@ class home extends StatelessWidget {
                                   Radius.circular(10),
                                 ),
                               ),
-                              child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      padding: EdgeInsets.all(5),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Container(
-                                            height: MediaQueryHeight * 0.15,
-                                            width: MediaQueryWidth * 0.25,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                              color: Colors.white,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.5),
-                                                  spreadRadius: 5,
-                                                  blurRadius: 7,
-                                                  offset: Offset(0, 3),
-                                                ),
-                                              ],
+                              child: GridView.count(
+                                  padding: EdgeInsets.all(0),
+                                  crossAxisCount: 3,
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.all(10),
+                                      child: Container(
+                                        height: MediaQueryHeight * 0.15,
+                                        width: MediaQueryWidth * 0.25,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
+                                              spreadRadius: 5,
+                                              blurRadius: 7,
+                                              offset: Offset(0, 3),
                                             ),
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  child: Icon(Icons.wallet,
-                                                      size: 65,
-                                                      color: Color.fromARGB(
-                                                          255, 0, 0, 0)),
-                                                ),
-                                                Container(
-                                                  child: TextButton(
-                                                    onPressed: () {
-                                                      Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder:
-                                                                  (context) =>
-                                                                      home()));
-                                                    },
-                                                    child: Text(
-                                                      "Cek Saldo",
-                                                      style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Color.fromARGB(
-                                                            255, 7, 7, 7),
-                                                      ),
-                                                    ),
+                                          ],
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              child: Icon(Icons.wallet,
+                                                  size: 50,
+                                                  color: Color.fromARGB(
+                                                      255, 0, 0, 0)),
+                                            ),
+                                            Container(
+                                              child: TextButton(
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              CekSaldo()));
+                                                },
+                                                child: Text(
+                                                  "Cek Saldo",
+                                                  style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Color.fromARGB(
+                                                        255, 7, 7, 7),
                                                   ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                          Container(
-                                            height: MediaQueryHeight * 0.15,
-                                            width: MediaQueryWidth * 0.25,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                              color: Colors.white,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.5),
-                                                  spreadRadius: 5,
-                                                  blurRadius: 7,
-                                                  offset: Offset(0, 3),
                                                 ),
-                                              ],
-                                            ),
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  child: Icon(
-                                                      Icons.monetization_on,
-                                                      size: 65,
-                                                      color: Color.fromARGB(
-                                                          255, 0, 0, 0)),
-                                                ),
-                                                Container(
-                                                  child: TextButton(
-                                                    onPressed: () {
-                                                      Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder:
-                                                                  (context) =>
-                                                                      home()));
-                                                    },
-                                                    child: Text(
-                                                      "Transfer",
-                                                      style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Color.fromARGB(
-                                                            255, 7, 7, 7),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                          Container(
-                                            height: MediaQueryHeight * 0.15,
-                                            width: MediaQueryWidth * 0.25,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                              color: Colors.white,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.5),
-                                                  spreadRadius: 5,
-                                                  blurRadius: 7,
-                                                  offset: Offset(0, 3),
-                                                ),
-                                              ],
-                                            ),
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  child: Icon(Icons.money,
-                                                      size: 65,
-                                                      color: Color.fromARGB(
-                                                          255, 0, 0, 0)),
-                                                ),
-                                                Container(
-                                                  child: TextButton(
-                                                    onPressed: () {
-                                                      Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder:
-                                                                  (context) =>
-                                                                      home()));
-                                                    },
-                                                    child: Text(
-                                                      "Deposit",
-                                                      style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Color.fromARGB(
-                                                            255, 7, 7, 7),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ],
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                    Container(
-                                      padding: EdgeInsets.all(5),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Container(
-                                            height: MediaQueryHeight * 0.15,
-                                            width: MediaQueryWidth * 0.25,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                              color: Colors.white,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.5),
-                                                  spreadRadius: 5,
-                                                  blurRadius: 7,
-                                                  offset: Offset(0, 3),
-                                                ),
-                                              ],
+                                    Padding(
+                                      padding: const EdgeInsets.all(10),
+                                      child: Container(
+                                        height: MediaQueryHeight * 0.15,
+                                        width: MediaQueryWidth * 0.25,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
+                                              spreadRadius: 5,
+                                              blurRadius: 7,
+                                              offset: Offset(0, 3),
                                             ),
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  child: Icon(Icons.credit_card,
-                                                      size: 65,
-                                                      color: Color.fromARGB(
-                                                          255, 0, 0, 0)),
-                                                ),
-                                                Container(
-                                                  child: TextButton(
-                                                    onPressed: () {
-                                                      Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder:
-                                                                  (context) =>
-                                                                      home()));
-                                                    },
-                                                    child: Text(
-                                                      "Pembayaran",
-                                                      style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Color.fromARGB(
-                                                            255, 7, 7, 7),
-                                                      ),
-                                                    ),
+                                          ],
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              child: Icon(Icons.monetization_on,
+                                                  size: 50,
+                                                  color: Color.fromARGB(
+                                                      255, 0, 0, 0)),
+                                            ),
+                                            Container(
+                                              child: TextButton(
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              Transfer()));
+                                                },
+                                                child: Text(
+                                                  "Transfer",
+                                                  style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Color.fromARGB(
+                                                        255, 7, 7, 7),
                                                   ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                          Container(
-                                            height: MediaQueryHeight * 0.15,
-                                            width: MediaQueryWidth * 0.25,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                              color: Colors.white,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.5),
-                                                  spreadRadius: 5,
-                                                  blurRadius: 7,
-                                                  offset: Offset(0, 3),
                                                 ),
-                                              ],
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(10),
+                                      child: Container(
+                                        height: MediaQueryHeight * 0.15,
+                                        width: MediaQueryWidth * 0.25,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
+                                              spreadRadius: 5,
+                                              blurRadius: 7,
+                                              offset: Offset(0, 3),
                                             ),
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  child: Icon(
-                                                      Icons.attach_money,
-                                                      size: 65,
-                                                      color: Color.fromARGB(
-                                                          255, 0, 0, 0)),
-                                                ),
-                                                Container(
-                                                  child: TextButton(
-                                                    onPressed: () {
-                                                      Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder:
-                                                                  (context) =>
-                                                                      home()));
-                                                    },
-                                                    child: Text(
-                                                      "Pinjaman",
-                                                      style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Color.fromARGB(
-                                                            255, 7, 7, 7),
-                                                      ),
-                                                    ),
+                                          ],
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              child: Icon(Icons.money,
+                                                  size: 50,
+                                                  color: Color.fromARGB(
+                                                      255, 0, 0, 0)),
+                                            ),
+                                            Container(
+                                              child: TextButton(
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              Deposito()));
+                                                },
+                                                child: Text(
+                                                  "Deposit",
+                                                  style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Color.fromARGB(
+                                                        255, 7, 7, 7),
                                                   ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                          Container(
-                                            height: MediaQueryHeight * 0.15,
-                                            width: MediaQueryWidth * 0.25,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                              color: Colors.white,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.5),
-                                                  spreadRadius: 5,
-                                                  blurRadius: 7,
-                                                  offset: Offset(0, 3),
                                                 ),
-                                              ],
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(10),
+                                      child: Container(
+                                        height: MediaQueryHeight * 0.15,
+                                        width: MediaQueryWidth * 0.25,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
+                                              spreadRadius: 5,
+                                              blurRadius: 7,
+                                              offset: Offset(0, 3),
                                             ),
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  child: Icon(
-                                                      Icons.insert_chart,
-                                                      size: 65,
-                                                      color: Color.fromARGB(
-                                                          255, 0, 0, 0)),
-                                                ),
-                                                Container(
-                                                  child: TextButton(
-                                                    onPressed: () {
-                                                      Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder:
-                                                                  (context) =>
-                                                                      home()));
-                                                    },
-                                                    child: Text(
-                                                      "mutasi",
-                                                      style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Color.fromARGB(
-                                                            255, 7, 7, 7),
-                                                      ),
-                                                    ),
+                                          ],
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              child: Icon(Icons.credit_card,
+                                                  size: 50,
+                                                  color: Color.fromARGB(
+                                                      255, 0, 0, 0)),
+                                            ),
+                                            Container(
+                                              child: TextButton(
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              Pembayaran()));
+                                                },
+                                                child: Text(
+                                                  "Pembayaran",
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Color.fromARGB(
+                                                        255, 7, 7, 7),
                                                   ),
-                                                )
-                                              ],
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(10),
+                                      child: Container(
+                                        height: MediaQueryHeight * 0.15,
+                                        width: MediaQueryWidth * 0.25,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
+                                              spreadRadius: 5,
+                                              blurRadius: 7,
+                                              offset: Offset(0, 3),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              child: Icon(Icons.attach_money,
+                                                  size: 50,
+                                                  color: Color.fromARGB(
+                                                      255, 0, 0, 0)),
+                                            ),
+                                            Container(
+                                              child: TextButton(
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              Pinjaman()));
+                                                },
+                                                child: Text(
+                                                  "Pinjaman",
+                                                  style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Color.fromARGB(
+                                                        255, 7, 7, 7),
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(10),
+                                      child: Container(
+                                        height: MediaQueryHeight * 0.15,
+                                        width: MediaQueryWidth * 0.25,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
+                                              spreadRadius: 5,
+                                              blurRadius: 7,
+                                              offset: Offset(0, 3),
+                                            ),
+                                          ],
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              child: Icon(Icons.insert_chart,
+                                                  size: 50,
+                                                  color: Color.fromARGB(
+                                                      255, 0, 0, 0)),
+                                            ),
+                                            Container(
+                                              child: TextButton(
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              Mutasi()));
+                                                },
+                                                child: Text(
+                                                  "mutasi",
+                                                  style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Color.fromARGB(
+                                                        255, 7, 7, 7),
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ]),
