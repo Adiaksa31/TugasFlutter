@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_tugas/services/user_services.dart';
-
+import 'package:flutter_application_tugas/model/user.dart';
 
 class Pinjaman extends StatefulWidget {
   @override
@@ -9,52 +9,46 @@ class Pinjaman extends StatefulWidget {
 
 class _PinjamanState extends State<Pinjaman> {
   //2. buat fungsi get data user
+  List<ListUsersModel> _listUser = [];
+
+  //2. buat fungsi get data user
   getUsers() async {
-    UserService _service = UserService();
-    await _service.getdata().then((value) {
+    ListUsersService _service = ListUsersService();
+    await _service.getDataUsers().then((value) {
       setState(() {
-        // _listUser = value;
+        _listUser = value!;
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    double lebar = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 145, 141, 141),
-        title: Text('Halaman Pinjaman'),
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: FutureBuilder<List<dynamic>>(
-              future: getUsers(),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                      padding: EdgeInsets.all(10),
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return ListTile(
-                          leading: CircleAvatar(
-                            radius: 30,
-                            backgroundImage:
-                                NetworkImage(snapshot.data[index]['avatar']),
-                          ),
-                          title: Text(snapshot.data[index]['first_name'] +
-                              " " +
-                              snapshot.data[index]['last_name']),
-                          subtitle: Text(snapshot.data[index]['email']),
-                        );
-                      });
-                } else {
-                  return Center(child: CircularProgressIndicator());
-                }
+      appBar: AppBar(),
+      body: Container(
+        child: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                getUsers();
               },
+              child: Text(
+                'Lihat Data',
+                style: TextStyle(fontSize: 50),
+              ),
             ),
-          )
-        ],
+            Expanded(
+              child: ListView.builder(
+                  itemCount: _listUser.length,
+                  itemBuilder: (context, index) {
+                    ListUsersModel data = _listUser[index];
+                    return cardlist(data.id!.toString(), data.firstName!,
+                        Colors.red, data.avatar!, Colors.grey.shade100);
+                  }),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -78,6 +72,19 @@ class _PinjamanState extends State<Pinjaman> {
                     color: Colors.white,
                     fontWeight: FontWeight.bold)),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget gridText(String nilai) {
+    return Center(
+      child: Text(
+        nilai,
+        style: const TextStyle(
+          fontSize: 60,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
         ),
       ),
     );
