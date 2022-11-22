@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_tugas/bar_code.dart';
 import 'package:flutter_application_tugas/cek_saldo.dart';
 import 'package:flutter_application_tugas/deposito.dart';
 import 'package:flutter_application_tugas/main.dart';
@@ -45,7 +46,10 @@ class home extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.grey,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Qrscanner()));
+        },
         child: Container(
           margin: EdgeInsets.all(15.0),
           child: Icon(Icons.qr_code_scanner),
