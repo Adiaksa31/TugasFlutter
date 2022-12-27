@@ -1,87 +1,26 @@
-import 'dart:async';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_tugas/home.dart';
-import 'package:flutter_application_tugas/register.dart';
+import 'package:flutter_application_tugas/main.dart';
+import 'package:flutter_application_tugas/model/user.dart';
 import 'package:flutter_application_tugas/services/user_services.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-TextEditingController getUser = new TextEditingController();
-TextEditingController getPass = new TextEditingController();
-final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+class register extends StatefulWidget {
+  const register({Key? key}) : super(key: key);
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<register> createState() => _registerState();
 }
 
-class _MyAppState extends State<MyApp> {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Tugas',
-      theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
-      ),
-      debugShowCheckedModeBanner: false,
-      home: const MyHomePage(title: 'Koperasi Undiksha'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  // AlertDialog alert = AlertDialog(
-  //   title: Text('Login Failed'),
-  //   content: Text('Try to Check your Username or Password'),
-  // );
-
-  // void _showAlertDialog(BuildContext context) {
-  //   showCupertinoModalPopup<void>(
-  //     context: context,
-  //     builder: (BuildContext context) => CupertinoAlertDialog(
-  //       title: const Text('Login Failed'),
-  //       content: const Text('Try to Check your Username or Password'),
-  //     ),
-  //   );
-  // }
-
-  postLogin(String username, String password) async {
-    ListUsersService _service = ListUsersService();
-    await _service.postLogin(username, password).then((value) {
-      if (value) {
-        print('login  berhasil');
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => home()),
-        );
-      } else {
-        print('login gagal');
-      }
-      print(value);
-    });
-    // print(user);
-  }
-
+class _registerState extends State<register> {
+  late String Username = '';
+  late String Password = '';
+  late String nama = '';
   @override
   Widget build(BuildContext context) {
     final MediaQueryHeight = MediaQuery.of(context).size.height;
     final MediaQueryWidth = MediaQuery.of(context).size.width;
     final myAppBar = AppBar(
         title: Center(
-      child: Text(widget.title),
+      child: Text('Register'),
     ));
 
     final bodyHeight = MediaQueryHeight -
@@ -91,7 +30,6 @@ class _MyHomePageState extends State<MyHomePage> {
     final bool islandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
-      key: _scaffoldKey,
       appBar: myAppBar,
       body: SingleChildScrollView(
           child: (islandscape)
@@ -128,22 +66,38 @@ class _MyHomePageState extends State<MyHomePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           TextField(
-                            controller: getUser,
+                            onChanged: (value) {
+                              nama = value;
+                            },
                             decoration: InputDecoration(
                                 contentPadding:
                                     EdgeInsets.symmetric(horizontal: 10),
-                                hintText: "Email"),
+                                hintText: "Masukkan Nama"),
+                          ),
+                          Container(
+                            height: MediaQueryHeight * 0.01,
+                          ),
+                          TextField(
+                            onChanged: (value) {
+                              Username = value;
+                            },
+                            decoration: InputDecoration(
+                                contentPadding:
+                                    EdgeInsets.symmetric(horizontal: 10),
+                                hintText: "Masukkan Email"),
                           ),
                           Container(
                             height: MediaQueryHeight * 0.01,
                           ),
                           TextField(
                             obscureText: true,
-                            controller: getPass,
+                            onChanged: (value) {
+                              Password = value;
+                            },
                             decoration: InputDecoration(
                                 contentPadding:
                                     EdgeInsets.symmetric(horizontal: 10),
-                                hintText: "Password"),
+                                hintText: "Masukkan Password"),
                           ),
                           Container(
                             height: MediaQueryHeight * 0.03,
@@ -163,8 +117,16 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ),
                                 ),
                                 onPressed: () async {
-                                  postLogin(getUser.text, getPass.text);
-
+                                  ListUsersService _service =
+                                      ListUsersService();
+                                  ListUsersModel user = await _service
+                                      .postRegister(Username, Password, nama);
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => MyApp()),
+                                  );
+                                  setState(() {});
                                   // Navigator.pushReplacement(
                                   //   context,
                                   //   MaterialPageRoute(
@@ -233,35 +195,6 @@ class _MyHomePageState extends State<MyHomePage> {
                             height: MediaQueryHeight * 0.01,
                           ),
                           Container(
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  TextButton(
-                                    onPressed: () {},
-                                    child: Text(
-                                      "Daftar Mbangking",
-                                      style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 106, 127, 247),
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w900),
-                                    ),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {},
-                                    child: Text(
-                                      "Lupa Password?",
-                                      style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 106, 127, 247),
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w900),
-                                    ),
-                                  ),
-                                ]),
-                          ),
-                          Container(
                             height: MediaQueryHeight * 0.0,
                           ),
                         ],
@@ -317,22 +250,38 @@ class _MyHomePageState extends State<MyHomePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           TextField(
-                            controller: getUser,
+                            onChanged: (value) {
+                              nama = value;
+                            },
                             decoration: InputDecoration(
                                 contentPadding:
                                     EdgeInsets.symmetric(horizontal: 10),
-                                hintText: "Email"),
+                                hintText: "Masukkan Nama"),
+                          ),
+                          Container(
+                            height: MediaQueryHeight * 0.01,
+                          ),
+                          TextField(
+                            onChanged: (value) {
+                              Username = value;
+                            },
+                            decoration: InputDecoration(
+                                contentPadding:
+                                    EdgeInsets.symmetric(horizontal: 10),
+                                hintText: "Masukkan Email"),
                           ),
                           Container(
                             height: MediaQueryHeight * 0.01,
                           ),
                           TextField(
                             obscureText: true,
-                            controller: getPass,
+                            onChanged: (value) {
+                              Password = value;
+                            },
                             decoration: InputDecoration(
                                 contentPadding:
                                     EdgeInsets.symmetric(horizontal: 10),
-                                hintText: "Password"),
+                                hintText: "Masukkan Password"),
                           ),
                           Container(
                             height: MediaQueryHeight * 0.03,
@@ -351,14 +300,17 @@ class _MyHomePageState extends State<MyHomePage> {
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                 ),
-                                onPressed: () {
-                                  postLogin(getUser.text, getPass.text);
+                                onPressed: () async {
+                                  ListUsersService _service =
+                                      ListUsersService();
+                                  ListUsersModel user = await _service
+                                      .postRegister(Username, Password, nama);
                                   Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => home(),
-                                    ),
+                                        builder: (context) => MyApp()),
                                   );
+                                  setState(() {});
                                   // if (getUser.text == '' &&
                                   //     getPass.text == '') {
                                   //   Navigator.pushReplacement(
@@ -408,7 +360,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   // }
                                 },
                                 child: Text(
-                                  "Login",
+                                  "Kirim",
                                   style: TextStyle(
                                     color: Color.fromARGB(255, 255, 253, 253),
                                   ),
@@ -416,44 +368,25 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                             ),
                           ),
-                          Container(
-                            height: MediaQueryHeight * 0.01,
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MyApp(),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              "Login",
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 106, 127, 247),
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w900),
+                            ),
                           ),
                           Container(
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => register(),
-                                    ),
-                                  );
-                                    },
-                                    child: Text(
-                                      "Daftar Mbangking",
-                                      style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 106, 127, 247),
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w900),
-                                    ),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {},
-                                    child: Text(
-                                      "Lupa Password?",
-                                      style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 106, 127, 247),
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w900),
-                                    ),
-                                  ),
-                                ]),
+                            height: MediaQueryHeight * 0.01,
                           ),
                           Container(
                             height: MediaQueryHeight * 0.0,

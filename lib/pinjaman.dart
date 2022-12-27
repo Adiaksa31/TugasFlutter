@@ -43,8 +43,8 @@ class _PinjamanState extends State<Pinjaman> {
                   itemCount: _listUser.length,
                   itemBuilder: (context, index) {
                     ListUsersModel data = _listUser[index];
-                    return cardlist(data.id!.toString(), data.firstName!,
-                        Colors.red, data.avatar!, Colors.grey.shade100);
+                    return cardlist(data.userId!.toString(), data.nama!,
+                        Colors.red, data.nama!, Colors.grey.shade100);
                   }),
             ),
           ],
@@ -89,4 +89,5 @@ class _PinjamanState extends State<Pinjaman> {
       ),
     );
   }
+  
 }
