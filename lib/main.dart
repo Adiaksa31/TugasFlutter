@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_tugas/home.dart';
+import 'package:flutter_application_tugas/model/user.dart';
 import 'package:flutter_application_tugas/register.dart';
 import 'package:flutter_application_tugas/services/user_services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,6 +18,7 @@ final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+  
 
   @override
   State<MyApp> createState() => _MyAppState();

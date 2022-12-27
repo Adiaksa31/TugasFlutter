@@ -94,4 +94,31 @@ class ListUsersService {
       return postRegister(username, password, nama);
     }
   }
+
+
+  transfer(int user_id, double jumlah_setoran) async {
+    String url = 'https://koperasiundiksha.000webhostapp.com/setoran';
+    final Response response;
+    FormData formData = FormData.fromMap(
+        {"user_id": user_id, "jumlah_setoran": jumlah_setoran});
+    try {
+      response = await dio.post(url, data: formData);
+      print('berhasil');
+    } catch (e) {
+      print('gagal');
+    }
+  }
+
+    tarikSaldo(int user_id, double jumlah_tarikan) async {
+    String url = 'https://koperasiundiksha.000webhostapp.com/tarikan';
+    final Response response;
+    FormData formData = FormData.fromMap(
+        {"user_id": user_id, "jumlah_tarikan": jumlah_tarikan});
+    try {
+      response = await dio.post(url, data: formData);
+      print('berhasil');
+    } catch (e) {
+      print('gagal');
+    }
+  }
 }

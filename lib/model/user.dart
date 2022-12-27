@@ -11,7 +11,7 @@ class ListUsersModel {
   String? username;
   String? password;
   String? nama;
-  int? saldo;
+  String? saldo;
 
   factory ListUsersModel.fromJson(Map<String, dynamic> json) => ListUsersModel(
         userId: json["user_id"],
