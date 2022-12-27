@@ -3,14 +3,21 @@ import 'package:flutter_application_tugas/bar_code.dart';
 import 'package:flutter_application_tugas/cek_saldo.dart';
 import 'package:flutter_application_tugas/deposito.dart';
 import 'package:flutter_application_tugas/main.dart';
+import 'package:flutter_application_tugas/model/user.dart';
 import 'package:flutter_application_tugas/mutasi.dart';
 import 'package:flutter_application_tugas/pembayaran.dart';
 import 'package:flutter_application_tugas/pinjaman.dart';
 import 'package:flutter_application_tugas/transfer.dart';
 
-class home extends StatelessWidget {
-  const home({Key? key}) : super(key: key);
+class home extends StatefulWidget {
+  final ListUsersModel user;
+  const home({Key? key, required this.user}) : super(key: key);
 
+  @override
+  State<home> createState() => _homeState();
+}
+
+class _homeState extends State<home> {
   @override
   Widget build(BuildContext context) {
     final MediaQueryHeight = MediaQuery.of(context).size.height;
@@ -155,7 +162,8 @@ class home extends StatelessWidget {
                                                           EdgeInsets.fromLTRB(
                                                               10, 5, 0, 5),
                                                       child: Text(
-                                                        "Kadek Adiaksa Widya Putra",
+                                                        widget.user.nama
+                                                            .toString(),
                                                         style: TextStyle(
                                                             fontSize: 17),
                                                       ),
@@ -199,7 +207,8 @@ class home extends StatelessWidget {
                                                           EdgeInsets.fromLTRB(
                                                               10, 5, 0, 5),
                                                       child: Text(
-                                                        "Rp 100.000.000.000",
+                                                        widget.user.saldo
+                                                            .toString(),
                                                         style: TextStyle(
                                                             fontSize: 17),
                                                       ),
@@ -259,7 +268,7 @@ class home extends StatelessWidget {
                                     icon(
                                         con: Icons.payment,
                                         desc: 'Pembayaran',
-                                        route: Pembayaran()),
+                                        route: Pembayaran(user: widget.user)),
                                     icon(
                                         con: Icons.attach_money,
                                         desc: 'Pinjaman',
@@ -409,7 +418,8 @@ class home extends StatelessWidget {
                                                           EdgeInsets.fromLTRB(
                                                               10, 0, 0, 5),
                                                       child: Text(
-                                                        "Kadek Adiaksa Widya Putra",
+                                                        widget.user.nama
+                                                            .toString(),
                                                         style: TextStyle(
                                                             fontSize: 17),
                                                       ),
@@ -453,7 +463,8 @@ class home extends StatelessWidget {
                                                           EdgeInsets.fromLTRB(
                                                               10, 0, 0, 5),
                                                       child: Text(
-                                                        "Rp 100.000.000.000",
+                                                        widget.user.saldo
+                                                            .toString(),
                                                         style: TextStyle(
                                                             fontSize: 17),
                                                       ),
@@ -513,7 +524,7 @@ class home extends StatelessWidget {
                                     icon(
                                         con: Icons.payment,
                                         desc: 'Pembayaran',
-                                        route: Pembayaran()),
+                                        route: Pembayaran(user: widget.user)),
                                     icon(
                                         con: Icons.attach_money,
                                         desc: 'Pinjaman',

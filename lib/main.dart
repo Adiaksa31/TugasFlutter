@@ -18,7 +18,6 @@ final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
-  
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -33,7 +32,7 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.blueGrey,
       ),
       debugShowCheckedModeBanner: false,
-      home: const MyHomePage(title: 'Koperasi Undiksha'),
+      home: MyHomePage(title: 'Koperasi Undiksha'),
     );
   }
 }
@@ -62,22 +61,6 @@ class _MyHomePageState extends State<MyHomePage> {
   //     ),
   //   );
   // }
-
-  postLogin(String username, String password) async {
-    ListUsersService _service = ListUsersService();
-    await _service.postLogin(username, password).then((value) {
-      if (value) {
-        print('login  berhasil');
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => home()),
-        );
-      } else {
-        print('login gagal');
-      }
-      print(value);
-    });
-    // print(user);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -355,14 +338,17 @@ class _MyHomePageState extends State<MyHomePage> {
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                 ),
-                                onPressed: () {
-                                  postLogin(getUser.text, getPass.text);
+                                onPressed: () async {
+                                  ListUsersService _service =
+                                      ListUsersService();
+                                  ListUsersModel user = await _service
+                                      .postLogin(getUser.text, getPass.text);
                                   Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => home(),
-                                    ),
+                                        builder: (context) => home(user: user)),
                                   );
+
                                   // if (getUser.text == '' &&
                                   //     getPass.text == '') {
                                   //   Navigator.pushReplacement(
@@ -431,11 +417,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                   TextButton(
                                     onPressed: () {
                                       Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => register(),
-                                    ),
-                                  );
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => register(),
+                                        ),
+                                      );
                                     },
                                     child: Text(
                                       "Daftar Mbangking",
@@ -483,5 +469,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 )),
     );
+  }
+
+  postLogin(String username, String password) async {
+    ListUsersService _service = ListUsersService();
+    await _service.postLogin(username, password);
   }
 }

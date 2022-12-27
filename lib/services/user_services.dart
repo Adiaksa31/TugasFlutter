@@ -59,23 +59,34 @@ class ListUsersService {
     final Response response;
     FormData formData =
         FormData.fromMap({"username": username, "password": password});
-    try {
-      // dio.options.headers['Authentication']
-      response = await dio.post(url, data: formData);
-      print(response.data);
-      // print(response.data[0]["nama"]);
-      if (response.statusCode == 200) {
-        final data = response.data;
-        // return ListUsersModel(
-        //   userId: data["user_id"],
-        //   username: data["username"],
-        //   password: data["password"],
-        //   nama: data["nama"],
-        //   saldo: data["saldo"],
-        // );
-        return true;
-      }
-    } catch (e) {}
+    // {"username": username, "password": password};
+
+    // dio.options.headers['Authentication'] = 'Bearer $token'
+    // dio.options.headers['Content type'] = 'aplication/json'
+    response = await dio.post(
+      url,
+      data: formData,
+    );
+    if (response.data['status'] == "success") {
+      final data = response.data;
+      print(data['user_id']);
+      return ListUsersModel(
+        userId: data['data'][0]['user_id'],
+        username: username,
+        password: password,
+        nama: data['data'][0]['nama'],
+        saldo: data['data'][0]['saldo'],
+      );
+    } else {
+      // final data = jsonDecode(response.data);
+      // final runHyperlink = data['data'].map( (e) => e['nama']).toList().cast<Map<String, dynamic>>();
+      // final dataUser = data['data']
+      //     .map((i) => i['nama'])
+      //     .toList().cast<Map<String, dynamic>>();
+      // print(dataUser);
+      // print(response.data['data'][0]['nama']);
+      return postLogin(username, password);
+    }
   }
 
   postRegister(String username, String password, String nama) async {
@@ -95,7 +106,6 @@ class ListUsersService {
     }
   }
 
-
   transfer(int user_id, double jumlah_setoran) async {
     String url = 'https://koperasiundiksha.000webhostapp.com/setoran';
     final Response response;
@@ -109,7 +119,7 @@ class ListUsersService {
     }
   }
 
-    tarikSaldo(int user_id, double jumlah_tarikan) async {
+  tarikSaldo(int user_id, double jumlah_tarikan) async {
     String url = 'https://koperasiundiksha.000webhostapp.com/tarikan';
     final Response response;
     FormData formData = FormData.fromMap(
