@@ -344,6 +344,34 @@ class _homeState extends State<home> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: <Widget>[
                             Container(
+                              width: MediaQueryWidth * 0.5,
+                              height: MediaQueryHeight * 0.08,
+                              child: Column(
+                                children: [
+                                  Container(
+                                    width: MediaQueryWidth * 0.8,
+                                    padding: EdgeInsets.fromLTRB(10, 5, 0, 0),
+                                    child: Text(
+                                      "Nomor Rekening",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: MediaQueryWidth * 0.8,
+                                    padding: EdgeInsets.fromLTRB(10, 0, 0, 5),
+                                    child: Text(
+                                      widget.user.nomor_rekening.toString(),
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(fontSize: 17),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Container(
                                 height: MediaQueryHeight * 0.2,
                                 padding: EdgeInsets.all(10),
                                 width: double.infinity,
