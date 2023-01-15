@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Qrscanner extends StatefulWidget {
   const Qrscanner({super.key});
@@ -12,48 +13,47 @@ class Qrscanner extends StatefulWidget {
 }
 
 class _QrscannerState extends State<Qrscanner> {
-  String _scanBarcode = '';
-  @override
-  void initState() {
-    super.initState();
+  void parseUri() {
+    url = Uri.parse(barcode);
   }
 
-  Future<void> scanQR() async {
-    String barcode;
+  static String barcode = '';
+  Uri url = Uri.parse(barcode);
 
-    try {
-      barcode = await FlutterBarcodeScanner.scanBarcode(
-          '#ff6666', 'Cancel', true, ScanMode.QR);
-      print(barcode);
-    } on PlatformException {
-      barcode = 'Failed to get platform version.';
+  scanQR() async {
+    await FlutterBarcodeScanner.scanBarcode(
+            '#000000', 'Cancel', true, ScanMode.BARCODE)
+        .then(
+      (value) => setState(
+        () {
+          barcode = value;
+          parseUri();
+        },
+      ),
+    );
+  }
+
+  Future<void> _launchUrl() async {
+    if (!await launchUrl(url)) {
+      throw 'Could not launch $url';
     }
-
-    if (!mounted) return;
-
-    setState(() {
-      _scanBarcode = barcode;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
-            appBar: AppBar(title: const Text('Barcode scan')),
-            body: Builder(builder: (BuildContext context) {
-              return Container(
-                  alignment: Alignment.center,
-                  child: Flex(
-                      direction: Axis.vertical,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        ElevatedButton(
-                            onPressed: () => scanQR(),
-                            child: Text('Start QR scan')),
-                        Text('Scan Link : $_scanBarcode',
-                            style: TextStyle(fontSize: 20))
-                      ]));
-            })));
+    return Container(
+        alignment: Alignment.center,
+        child: Flex(
+            direction: Axis.vertical,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              ElevatedButton(
+                  onPressed: () => scanQR(), child: Text('Start QR scan')),
+              TextButton(
+                  onPressed: () {
+                    _launchUrl();
+                  },
+                  child: Text(barcode))
+            ]));
   }
 }
