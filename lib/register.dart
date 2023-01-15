@@ -14,6 +14,7 @@ class _registerState extends State<register> {
   late String Username = '';
   late String Password = '';
   late String nama = '';
+  late String nim = '';
   @override
   Widget build(BuildContext context) {
     final MediaQueryHeight = MediaQuery.of(context).size.height;
@@ -79,6 +80,18 @@ class _registerState extends State<register> {
                           ),
                           TextField(
                             onChanged: (value) {
+                              nim = value;
+                            },
+                            decoration: InputDecoration(
+                                contentPadding:
+                                    EdgeInsets.symmetric(horizontal: 10),
+                                hintText: "Masukkan Nim"),
+                          ),
+                          Container(
+                            height: MediaQueryHeight * 0.01,
+                          ),
+                          TextField(
+                            onChanged: (value) {
                               Username = value;
                             },
                             decoration: InputDecoration(
@@ -120,7 +133,7 @@ class _registerState extends State<register> {
                                   ListUsersService _service =
                                       ListUsersService();
                                   ListUsersModel user = await _service
-                                      .postRegister(Username, Password, nama);
+                                      .postRegister(Username, Password, nama, nim);
                                   Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
@@ -263,6 +276,18 @@ class _registerState extends State<register> {
                           ),
                           TextField(
                             onChanged: (value) {
+                              nim = value;
+                            },
+                            decoration: InputDecoration(
+                                contentPadding:
+                                    EdgeInsets.symmetric(horizontal: 10),
+                                hintText: "Masukkan Nim"),
+                          ),
+                          Container(
+                            height: MediaQueryHeight * 0.01,
+                          ),
+                          TextField(
+                            onChanged: (value) {
                               Username = value;
                             },
                             decoration: InputDecoration(
@@ -304,7 +329,7 @@ class _registerState extends State<register> {
                                   ListUsersService _service =
                                       ListUsersService();
                                   ListUsersModel user = await _service
-                                      .postRegister(Username, Password, nama);
+                                      .postRegister(Username, Password, nama, nim);
                                   Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(

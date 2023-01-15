@@ -14,13 +14,10 @@ class ListUsersService {
       if (response.statusCode == 200) {
         var json = response.data;
         //boleh dipakai sesuai kondisi data json
-        if (json is Map && json.keys.contains('data')) {
-          var data = json['data'];
-          if (data is List) {
-            return data
-                .map<ListUsersModel>((u) => ListUsersModel.fromJson(u))
-                .toList();
-          }
+        if (json is List) {
+          return json
+              .map<ListUsersModel>((u) => ListUsersModel.fromJson(u))
+              .toList();
         }
       }
       return null;
@@ -64,14 +61,14 @@ class ListUsersService {
       url,
       data: formData,
     );
-    if (response.data['status'] == "success") {
+    if (response.statusCode == 200) {
       final data = response.data;
       return ListUsersModel(
-        userId: data['data'][0]['user_id'],
+        userId: data[0]['user_id'],
         username: username,
         password: password,
-        nama: data['data'][0]['nama'],
-        saldo: data['data'][0]['saldo'],
+        nama: data[0]['nama'],
+        saldo: data[0]['saldo'],
         nomor_rekening: data[0]['nomor_rekening'],
       );
     } else {
@@ -79,11 +76,12 @@ class ListUsersService {
     }
   }
 
-  postRegister(String username, String password, String nama) async {
+  postRegister(
+      String username, String password, String nama, String nim) async {
     String url = 'http://apikoperasi.rey1024.com/register';
     final Response response;
     FormData formData = FormData.fromMap(
-        {"username": username, "password": password, "nama": nama});
+        {"username": username, "password": password, "nama": nama, "nim": nim});
     response = await dio.post(
       url,
       data: formData,
