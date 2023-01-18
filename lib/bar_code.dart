@@ -46,6 +46,14 @@ class _QrscannerState extends State<Qrscanner> {
             direction: Axis.vertical,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Text("Silakan Scan QR dibawah ini!!",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+              Padding(
+                padding: const EdgeInsets.all(30),
+                child: Image.asset(
+                  "img/qr.jpg",
+                ),
+              ),
               ElevatedButton(
                   onPressed: () => scanQR(), child: Text('Start QR scan')),
               TextButton(

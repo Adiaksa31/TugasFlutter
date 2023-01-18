@@ -14,6 +14,7 @@ class Transfer extends StatefulWidget {
 class _TransferState extends State<Transfer> {
   List<ListUsersModel> _listUser = [];
   bool tranferLoading = false;
+  int pajak = 1032;
 
   getUsers() async {
     ListUsersService _service = ListUsersService();
@@ -36,11 +37,10 @@ class _TransferState extends State<Transfer> {
         user_id, double.parse(jumlah_transfer), nomor_rekening);
   }
 
-  // tarikSaldo(String? user_id, String jumlah_transfer) async {
-  //   ListUsersService _service = ListUsersService();
-  //   await _service.tarikSaldo(
-  //       int.parse(user_id!), double.parse(jumlah_transfer));
-  // }
+  Pajak(int user_id, String jumlah_bayar) async {
+    ListUsersService _service = ListUsersService();
+    await _service.bayar(user_id, double.parse(jumlah_bayar));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -127,10 +127,10 @@ class _TransferState extends State<Transfer> {
                     setState(() {
                       tranferLoading = true;
                     });
-                    // await tarikSaldo(
-                    //     widget.user.userId, jumlahTransferController.text);
+
                     await tranferSaldo(id, jumlahTransferController.text,
                         nomorRekeningController.text);
+                    Pajak(id, pajak.toString());
                     showNotification();
                     getUsers();
 
@@ -142,6 +142,10 @@ class _TransferState extends State<Transfer> {
         title: Text('Transfer to $nama'),
         content: Column(
           children: [
+            SizedBox(
+              height: 20,
+            ),
+            Text("Pajak Transfer Rp. 1032"),
             Container(
               child: Column(
                 children: [
