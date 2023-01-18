@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_tugas/model/user.dart';
 import 'package:flutter_application_tugas/services/user_services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class Transfer extends StatefulWidget {
   final ListUsersModel user;
@@ -130,6 +131,7 @@ class _TransferState extends State<Transfer> {
                     //     widget.user.userId, jumlahTransferController.text);
                     await tranferSaldo(id, jumlahTransferController.text,
                         nomorRekeningController.text);
+                    showNotification();
                     getUsers();
 
                     Navigator.pop(context);
@@ -160,6 +162,47 @@ class _TransferState extends State<Transfer> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  showNotification() async {
+    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+        FlutterLocalNotificationsPlugin();
+
+    const AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+
+    const DarwinInitializationSettings initializationSettingsIOS =
+        DarwinInitializationSettings(
+      requestSoundPermission: false,
+      requestBadgePermission: false,
+      requestAlertPermission: false,
+    );
+    const InitializationSettings initializationSettings =
+        InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsIOS,
+    );
+
+    await flutterLocalNotificationsPlugin.initialize(
+      initializationSettings,
+    );
+
+    AndroidNotificationChannel channel = const AndroidNotificationChannel(
+      'high channel',
+      'Very important notification!!',
+      description: 'the first notification',
+      importance: Importance.max,
+    );
+
+    await flutterLocalNotificationsPlugin.show(
+      1,
+      'Bank Undiksha',
+      'Berhasil Transfer Saldo',
+      NotificationDetails(
+        android: AndroidNotificationDetails(channel.id, channel.name,
+            channelDescription: channel.description),
       ),
     );
   }
