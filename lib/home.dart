@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_tugas/bar_code.dart';
-import 'package:flutter_application_tugas/deposito.dart';
 import 'package:flutter_application_tugas/main.dart';
 import 'package:flutter_application_tugas/model/user.dart';
 import 'package:flutter_application_tugas/pembayaran.dart';
