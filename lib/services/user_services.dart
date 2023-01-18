@@ -10,10 +10,8 @@ class ListUsersService {
       response = await dio.get(
         url,
       );
-      // print(response.data);
       if (response.statusCode == 200) {
         var json = response.data;
-        //boleh dipakai sesuai kondisi data json
         if (json is List) {
           return json
               .map<ListUsersModel>((u) => ListUsersModel.fromJson(u))
@@ -26,30 +24,21 @@ class ListUsersService {
       throw Exception(error.response);
     }
   }
-  // postLogin(String username, String password) async {
-  //   String url = 'https://koperasiundiksha.000webhostapp.com';
-  //   Dio dio = Dio();
-  //   final Response response;
-  //   FormData formData =
-  //       FormData.fromMap({"username": username, "password": password});
-  //   try {
-  //     // dio.options.headers['Authentication']
-  //     response = await dio.post(url, data: formData);
-  //     print(response.data);
-  //     // print(response.data[0]["nama"]);
-  //     if (response.statusCode == 200) {
-  //       final data = response.data;
-  //       return ListUsersModel(
-  //         userId: data["user_id"],
-  //         username: data["username"],
-  //         password: data["password"],
-  //         nama: data["nama"],
-  //         saldo: data["saldo"],
-  //       );
-  //       // return true;
-  //     }
-  //   } catch (e) {}
-  // }
+
+  Saldo(int user_id) async {
+    String url = 'http://apikoperasi.rey1024.com/getsingleuser';
+    final Response response;
+    FormData formData = FormData.fromMap({"user_id": user_id});
+    response = await dio.post(url, data: formData);
+    if (response.statusCode == 200) {
+      final data = response.data;
+      print(data[0]['saldo']);
+      return int.parse(data[0]['saldo']);
+      // return print(response.statusCode);
+    } else {
+      return print('gagal');
+    }
+  }
 
   postLogin(String username, String password) async {
     String url = 'http://apikoperasi.rey1024.com';
@@ -94,12 +83,18 @@ class ListUsersService {
     }
   }
 
-  transfer(int user_id, double jumlah_setoran) async {
-    String url = 'http://apikoperasi.rey1024.com/setoran';
+  transfer(int user_id, double jumlah_transfer, String nomor_rekening) async {
+    String url = 'http://apikoperasi.rey1024.com/transfer';
     final Response response;
-    FormData formData = FormData.fromMap(
-        {"user_id": user_id, "jumlah_setoran": jumlah_setoran});
+    FormData formData = FormData.fromMap({
+      "id_pengirim": user_id,
+      "jumlah_transfer": jumlah_transfer,
+      "nomor_rekening": nomor_rekening
+    });
     try {
+      print(user_id);
+      print(jumlah_transfer);
+      print(nomor_rekening);
       response = await dio.post(url, data: formData);
       print('berhasil');
     } catch (e) {
@@ -112,6 +107,21 @@ class ListUsersService {
     final Response response;
     FormData formData = FormData.fromMap(
         {"user_id": user_id, "jumlah_tarikan": jumlah_tarikan});
+    try {
+      response = await dio.post(url, data: formData);
+      print('berhasil');
+    } catch (e) {
+      print('gagal');
+    }
+  }
+
+  topup(int user_id, double jumlah_topup) async {
+    String url = 'http://apikoperasi.rey1024.com/setoran';
+    final Response response;
+    FormData formData = FormData.fromMap({
+      "user_id": user_id,
+      "jumlah_setoran": jumlah_topup,
+    });
     try {
       response = await dio.post(url, data: formData);
       print('berhasil');

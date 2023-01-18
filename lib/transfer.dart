@@ -3,12 +3,12 @@ import 'package:flutter_application_tugas/model/user.dart';
 import 'package:flutter_application_tugas/services/user_services.dart';
 
 class Transfer extends StatefulWidget {
-  const Transfer({super.key});
+  final ListUsersModel user;
+  const Transfer({super.key, required this.user});
 
   @override
   State<Transfer> createState() => _TransferState();
 }
-
 
 class _TransferState extends State<Transfer> {
   List<ListUsersModel> _listUser = [];
@@ -28,16 +28,27 @@ class _TransferState extends State<Transfer> {
     );
   }
 
-  tranferSaldo(int user_id, String jumlah_setoran) async {
+  tranferSaldo(
+      int user_id, String jumlah_transfer, String nomor_rekening) async {
     ListUsersService _service = ListUsersService();
-    await _service.transfer(user_id, double.parse(jumlah_setoran));
+    await _service.transfer(
+        user_id, double.parse(jumlah_transfer), nomor_rekening);
   }
+
+  // tarikSaldo(String? user_id, String jumlah_transfer) async {
+  //   ListUsersService _service = ListUsersService();
+  //   await _service.tarikSaldo(
+  //       int.parse(user_id!), double.parse(jumlah_transfer));
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [IconButton(onPressed: getUsers, icon: Icon(Icons.refresh))],
+        actions: [
+          IconButton(
+              onPressed: getUsers, icon: Icon(Icons.assignment_ind_outlined))
+        ],
         title: Text('Transfer'),
         centerTitle: true,
       ),
@@ -76,10 +87,9 @@ class _TransferState extends State<Transfer> {
       subtitle: Text(subtitle + '\n' + saldo.toString()),
       trailing: IconButton(
           onPressed: () {
-            transferDialog(nama, int.parse(id));
-            // succesDialog();
+            transferDialog(nama, int.parse(widget.user.userId!));
           },
-          icon: Icon(Icons.money_outlined)),
+          icon: Icon(Icons.attach_money_outlined)),
     );
   }
 
@@ -97,7 +107,8 @@ class _TransferState extends State<Transfer> {
   }
 
   transferDialog(String nama, int id) {
-    TextEditingController jumlahSetoranController = TextEditingController();
+    TextEditingController jumlahTransferController = TextEditingController();
+    TextEditingController nomorRekeningController = TextEditingController();
     return showDialog(
       context: context,
       builder: (_) => AlertDialog(
@@ -115,8 +126,10 @@ class _TransferState extends State<Transfer> {
                     setState(() {
                       tranferLoading = true;
                     });
-                    // tranferSaldo(id, jumlahSetoranController.text);
-                    await tranferSaldo(id, jumlahSetoranController.text);
+                    // await tarikSaldo(
+                    //     widget.user.userId, jumlahTransferController.text);
+                    await tranferSaldo(id, jumlahTransferController.text,
+                        nomorRekeningController.text);
                     getUsers();
 
                     Navigator.pop(context);
@@ -132,9 +145,15 @@ class _TransferState extends State<Transfer> {
                 children: [
                   TextField(
                     decoration: InputDecoration(
-                      labelText: "Jumlah Setoran",
+                      labelText: "Jumlah transfer",
                     ),
-                    controller: jumlahSetoranController,
+                    controller: jumlahTransferController,
+                  ),
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: "Nomor rekening",
+                    ),
+                    controller: nomorRekeningController,
                   ),
                 ],
               ),

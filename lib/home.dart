@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_tugas/bar_code.dart';
-import 'package:flutter_application_tugas/cek_saldo.dart';
 import 'package:flutter_application_tugas/deposito.dart';
 import 'package:flutter_application_tugas/main.dart';
 import 'package:flutter_application_tugas/model/user.dart';
-import 'package:flutter_application_tugas/mutasi.dart';
 import 'package:flutter_application_tugas/pembayaran.dart';
-import 'package:flutter_application_tugas/pinjaman.dart';
+import 'package:flutter_application_tugas/topup.dart';
+import 'package:flutter_application_tugas/services/user_services.dart';
 import 'package:flutter_application_tugas/transfer.dart';
 
 class home extends StatefulWidget {
@@ -18,6 +17,7 @@ class home extends StatefulWidget {
 }
 
 class _homeState extends State<home> {
+  late int saldo = int.parse(widget.user.saldo.toString());
   @override
   Widget build(BuildContext context) {
     final MediaQueryHeight = MediaQuery.of(context).size.height;
@@ -88,7 +88,7 @@ class _homeState extends State<home> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: <Widget>[
                             Container(
-                                height: MediaQueryHeight * 0.47,
+                                height: MediaQueryHeight * 0.49,
                                 padding: EdgeInsets.all(10),
                                 width: double.infinity,
                                 // color: Colors.white,
@@ -227,7 +227,7 @@ class _homeState extends State<home> {
                               height: MediaQueryHeight * 0.01,
                             ),
                             Container(
-                              height: MediaQueryHeight * 0.38,
+                              height: MediaQueryHeight * 0.42,
                               padding: EdgeInsets.all(10),
                               width: double.infinity,
                               // color: Colors.white,
@@ -254,29 +254,19 @@ class _homeState extends State<home> {
                                   crossAxisCount: 6,
                                   children: <Widget>[
                                     icon(
-                                        con: Icons.wallet_giftcard,
-                                        desc: 'Cek Saldo',
-                                        route: Pinjaman()),
-                                    icon(
                                         con: Icons.monetization_on,
                                         desc: 'Transfer',
-                                        route: Transfer()),
-                                    icon(
-                                        con: Icons.money,
-                                        desc: 'Deposito',
-                                        route: Deposito()),
+                                        route: Transfer(
+                                          user: widget.user,
+                                        )),
                                     icon(
                                         con: Icons.payment,
                                         desc: 'Pembayaran',
                                         route: Pembayaran(user: widget.user)),
                                     icon(
-                                        con: Icons.attach_money,
-                                        desc: 'Pinjaman',
-                                        route: Pinjaman()),
-                                    icon(
-                                        con: Icons.insert_chart,
-                                        desc: 'Mutasi',
-                                        route: Mutasi()),
+                                        con: Icons.money,
+                                        desc: 'TopUp Saldo',
+                                        route: Topup(user: widget.user)),
                                   ]),
                             ),
                             Container(
@@ -344,15 +334,14 @@ class _homeState extends State<home> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: <Widget>[
                             Container(
-                              width: MediaQueryWidth * 0.5,
-                              height: MediaQueryHeight * 0.08,
-                              child: Column(
+                              width: MediaQueryWidth * 0.8,
+                              child: Row(
                                 children: [
                                   Container(
                                     width: MediaQueryWidth * 0.8,
                                     padding: EdgeInsets.fromLTRB(10, 5, 0, 0),
                                     child: Text(
-                                      "Nomor Rekening",
+                                      "Saldo Anda",
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
@@ -360,15 +349,29 @@ class _homeState extends State<home> {
                                     ),
                                   ),
                                   Container(
-                                    width: MediaQueryWidth * 0.8,
-                                    padding: EdgeInsets.fromLTRB(10, 0, 0, 5),
-                                    child: Text(
-                                      widget.user.nomor_rekening.toString(),
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(fontSize: 17),
-                                    ),
-                                  )
+                                    width: MediaQueryWidth * 0.00,
+                                    child: IconButton(
+                                        onPressed: () async {
+                                          ListUsersService _service =
+                                              ListUsersService();
+                                          saldo = await _service.Saldo(
+                                              int.parse(widget.user.userId
+                                                  .toString()));
+                                          print(saldo);
+                                          setState(() {});
+                                        },
+                                        icon: Icon(Icons.refresh)),
+                                  ),
                                 ],
+                              ),
+                            ),
+                            Container(
+                              width: MediaQueryWidth * 0.8,
+                              padding: EdgeInsets.fromLTRB(10, 0, 0, 5),
+                              child: Text(
+                                saldo.toString(),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 17),
                               ),
                             ),
                             Container(
@@ -475,7 +478,7 @@ class _homeState extends State<home> {
                                                           EdgeInsets.fromLTRB(
                                                               10, 5, 0, 0),
                                                       child: Text(
-                                                        "Total Saldo Anda",
+                                                        "Nomor Rekening",
                                                         textAlign:
                                                             TextAlign.start,
                                                         style: TextStyle(
@@ -491,7 +494,8 @@ class _homeState extends State<home> {
                                                           EdgeInsets.fromLTRB(
                                                               10, 0, 0, 5),
                                                       child: Text(
-                                                        widget.user.saldo
+                                                        widget
+                                                            .user.nomor_rekening
                                                             .toString(),
                                                         style: TextStyle(
                                                             fontSize: 17),
@@ -511,7 +515,7 @@ class _homeState extends State<home> {
                               height: MediaQueryHeight * 0.01,
                             ),
                             Container(
-                              height: MediaQueryHeight * 0.32,
+                              height: MediaQueryHeight * 0.17,
                               padding: EdgeInsets.all(5),
                               width: double.infinity,
                               // color: Colors.white,
@@ -538,29 +542,17 @@ class _homeState extends State<home> {
                                   crossAxisCount: 3,
                                   children: <Widget>[
                                     icon(
-                                        con: Icons.wallet_giftcard,
-                                        desc: 'Cek Saldo',
-                                        route: Pinjaman()),
-                                    icon(
                                         con: Icons.monetization_on,
                                         desc: 'Transfer',
-                                        route: Transfer()),
-                                    icon(
-                                        con: Icons.money,
-                                        desc: 'Deposito',
-                                        route: Deposito()),
+                                        route: Transfer(user: widget.user)),
                                     icon(
                                         con: Icons.payment,
                                         desc: 'Pembayaran',
                                         route: Pembayaran(user: widget.user)),
                                     icon(
                                         con: Icons.attach_money,
-                                        desc: 'Pinjaman',
-                                        route: Pinjaman()),
-                                    icon(
-                                        con: Icons.insert_chart,
-                                        desc: 'Mutasi',
-                                        route: Mutasi()),
+                                        desc: 'TopUp Saldo',
+                                        route: Topup(user: widget.user)),
                                   ]),
                             ),
                             Container(
