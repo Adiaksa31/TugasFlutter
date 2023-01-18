@@ -200,7 +200,7 @@ class _TransferState extends State<Transfer> {
       description: 'the first notification',
       importance: Importance.max,
     );
-
+//
     await flutterLocalNotificationsPlugin.show(
       1,
       'Bank Undiksha',
