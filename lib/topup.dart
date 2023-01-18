@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_tugas/services/user_services.dart';
 import 'package:flutter_application_tugas/model/user.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class Topup extends StatefulWidget {
   final ListUsersModel user;
@@ -57,6 +58,7 @@ class _TopupState extends State<Topup> {
               child: ElevatedButton(
                 onPressed: () {
                   confirmDialog(widget.user.userId, jumlahTopupController.text);
+                  showNotification();
                   // tarikSaldo(
                   //     widget.user.user_id, jumlahTopupController.text);
                 },
@@ -72,5 +74,46 @@ class _TopupState extends State<Topup> {
   topup(int user_id, String jumlah_topup) async {
     ListUsersService _service = ListUsersService();
     await _service.topup(user_id, double.parse(jumlah_topup));
+  }
+
+  showNotification() async {
+    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+        FlutterLocalNotificationsPlugin();
+
+    const AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+
+    const DarwinInitializationSettings initializationSettingsIOS =
+        DarwinInitializationSettings(
+      requestSoundPermission: false,
+      requestBadgePermission: false,
+      requestAlertPermission: false,
+    );
+    const InitializationSettings initializationSettings =
+        InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsIOS,
+    );
+
+    await flutterLocalNotificationsPlugin.initialize(
+      initializationSettings,
+    );
+
+    AndroidNotificationChannel channel = const AndroidNotificationChannel(
+      'high channel',
+      'Very important notification!!',
+      description: 'the first notification',
+      importance: Importance.max,
+    );
+
+    await flutterLocalNotificationsPlugin.show(
+      1,
+      'Bank Undiksha',
+      'Berhasil TopUp Saldo',
+      NotificationDetails(
+        android: AndroidNotificationDetails(channel.id, channel.name,
+            channelDescription: channel.description),
+      ),
+    );
   }
 }
