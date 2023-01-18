@@ -47,9 +47,13 @@ class _PembayaranState extends State<Pembayaran> {
               flex: 8,
               child: Column(
                 children: [
-                  TextField(
-                    controller: jumlahPembayaranController,
-                    decoration: InputDecoration(labelText: "Jumlah Pembayaran"),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: TextField(
+                      controller: jumlahPembayaranController,
+                      decoration:
+                          InputDecoration(labelText: "Jumlah Pembayaran"),
+                    ),
                   ),
                 ],
               ),

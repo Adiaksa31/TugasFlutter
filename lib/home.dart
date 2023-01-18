@@ -107,6 +107,43 @@ class _homeState extends State<home> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: <Widget>[
+                            Row(
+                              children: [
+                                Spacer(),
+                                SizedBox(
+                                  width: 60,
+                                ),
+                                Text(
+                                  'Saldo Anda',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15),
+                                ),
+                                Spacer(),
+                                IconButton(
+                                    onPressed: () async {
+                                      ListUsersService _service =
+                                          ListUsersService();
+                                      saldo = await _service.Saldo(int.parse(
+                                          widget.user.userId.toString()));
+                                      print(saldo);
+                                      setState(() {});
+                                    },
+                                    icon: Icon(Icons.refresh))
+                              ],
+                            ),
+                            Container(
+                              width: MediaQueryWidth * 0.8,
+                              padding: EdgeInsets.fromLTRB(10, 0, 0, 5),
+                              child: Text(
+                                'Rp. ' + saldo.toString(),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 17),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
                             Container(
                                 height: MediaQueryHeight * 0.49,
                                 padding: EdgeInsets.all(10),
@@ -211,7 +248,7 @@ class _homeState extends State<home> {
                                                           EdgeInsets.fromLTRB(
                                                               10, 5, 0, 0),
                                                       child: Text(
-                                                        "Total Saldo Anda",
+                                                        "Nomor Rekening",
                                                         textAlign:
                                                             TextAlign.start,
                                                         style: TextStyle(
@@ -227,7 +264,8 @@ class _homeState extends State<home> {
                                                           EdgeInsets.fromLTRB(
                                                               10, 5, 0, 5),
                                                       child: Text(
-                                                        widget.user.saldo
+                                                        widget
+                                                            .user.nomor_rekening
                                                             .toString(),
                                                         style: TextStyle(
                                                             fontSize: 17),
@@ -250,25 +288,6 @@ class _homeState extends State<home> {
                               height: MediaQueryHeight * 0.42,
                               padding: EdgeInsets.all(10),
                               width: double.infinity,
-                              // color: Colors.white,
-                              decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Color.fromARGB(255, 204, 202, 202),
-                                    // spreadRadius: 5,
-                                    offset: Offset(
-                                        1, 3), // changes position of shadow
-                                  ),
-                                ],
-                                border: Border.all(
-                                    color: const Color(0xFF000000),
-                                    style: BorderStyle.solid), //Border.all
-                                /*** The BorderRadius widget  is here ***/
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                              ),
                               child: GridView.count(
                                   padding: EdgeInsets.all(5),
                                   crossAxisCount: 6,
@@ -332,10 +351,15 @@ class _homeState extends State<home> {
                               ),
                             ),
                             Container(
-                              child: Icon(Icons.phone,
+                              child: IconButton(
+                                onPressed: _sendingTel,
+                                icon: Icon(
+                                  Icons.phone,
                                   size: 50,
-                                  color: Color.fromARGB(255, 0, 0, 0)),
-                              padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                  color: Color.fromARGB(255, 0, 0, 0),
+                                ),
+                              ),
+                              padding: const EdgeInsets.fromLTRB(0, 0, 20, 10),
                             ),
                           ],
                         )),
@@ -407,8 +431,7 @@ class _homeState extends State<home> {
                                   ],
                                   border: Border.all(
                                       color: const Color(0xFF000000),
-                                      style: BorderStyle.solid), //Border.all
-                                  /*** The BorderRadius widget  is here ***/
+                                      style: BorderStyle.solid),
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(10),
                                   ),
@@ -528,24 +551,12 @@ class _homeState extends State<home> {
                                   ],
                                 )),
                             SizedBox(
-                              height: 30,
+                              height: 15,
                             ),
                             Container(
                               height: MediaQueryHeight * 0.17,
                               padding: EdgeInsets.all(5),
                               width: double.infinity,
-                              // color: Colors.white,
-                              decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 255, 255, 255),
-
-                                border: Border.all(
-                                    color: Color.fromARGB(255, 255, 255, 255),
-                                    style: BorderStyle.solid), //Border.all
-                                /*** The BorderRadius widget  is here ***/
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                              ),
                               child: GridView.count(
                                   padding: EdgeInsets.all(5),
                                   crossAxisCount: 3,
@@ -564,15 +575,9 @@ class _homeState extends State<home> {
                                         route: Topup(user: widget.user)),
                                   ]),
                             ),
-                            Container(
-                              height: MediaQueryHeight * 0.01,
-                            ),
                           ],
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 50,
                     ),
                     Container(
                       color: Color.fromARGB(255, 194, 196, 199),

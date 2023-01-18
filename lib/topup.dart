@@ -46,9 +46,12 @@ class _TopupState extends State<Topup> {
               flex: 8,
               child: Column(
                 children: [
-                  TextField(
-                    controller: jumlahTopupController,
-                    decoration: InputDecoration(labelText: "Jumlah Topup"),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: TextField(
+                      controller: jumlahTopupController,
+                      decoration: InputDecoration(labelText: "Jumlah Topup"),
+                    ),
                   ),
                 ],
               ),
