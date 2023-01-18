@@ -131,8 +131,9 @@ class _TransferState extends State<Transfer> {
                     await tranferSaldo(id, jumlahTransferController.text,
                         nomorRekeningController.text);
                     Pajak(id, pajak.toString());
-                    showNotification();
+
                     getUsers();
+                    showNotification();
 
                     Navigator.pop(context);
                   },
