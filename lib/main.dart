@@ -155,7 +155,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => register(),
+                                        ),
+                                      );
+                                    },
                                     child: Text(
                                       "Daftar Mbangking",
                                       style: TextStyle(
