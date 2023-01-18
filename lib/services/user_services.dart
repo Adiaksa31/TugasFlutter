@@ -102,11 +102,11 @@ class ListUsersService {
     }
   }
 
-  tarikSaldo(int user_id, double jumlah_tarikan) async {
+  bayar(int user_id, double jumlah_bayar) async {
     String url = 'http://apikoperasi.rey1024.com/tarikan';
     final Response response;
     FormData formData = FormData.fromMap(
-        {"user_id": user_id, "jumlah_tarikan": jumlah_tarikan});
+        {"user_id": user_id, "jumlah_tarikan": jumlah_bayar});
     try {
       response = await dio.post(url, data: formData);
       print('berhasil');

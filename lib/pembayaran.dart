@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_tugas/model/user.dart';
 import 'package:flutter_application_tugas/services/user_services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class Pembayaran extends StatefulWidget {
   final ListUsersModel user;
@@ -11,10 +12,10 @@ class Pembayaran extends StatefulWidget {
 }
 
 class _PembayaranState extends State<Pembayaran> {
-  final TextEditingController jumlahPenarikanController =
+  final TextEditingController jumlahPembayaranController =
       TextEditingController();
 
-  confirmDialog(String? user_id, String jumlah_setoran) {
+  confirmDialog(String? user_id, String jumlah_bayar) {
     showDialog(
       context: (context),
       builder: (_) => AlertDialog(
@@ -22,7 +23,7 @@ class _PembayaranState extends State<Pembayaran> {
         actions: [
           ElevatedButton(
             onPressed: () async {
-              await tarikSaldo(user_id, jumlah_setoran);
+              await bayar(user_id, jumlah_bayar);
               Navigator.pop(context);
             },
             child: Text('Yes'),
@@ -47,8 +48,8 @@ class _PembayaranState extends State<Pembayaran> {
               child: Column(
                 children: [
                   TextField(
-                    controller: jumlahPenarikanController,
-                    decoration: InputDecoration(labelText: "Jumlah Penarikan"),
+                    controller: jumlahPembayaranController,
+                    decoration: InputDecoration(labelText: "Jumlah Pembayaran"),
                   ),
                 ],
               ),
@@ -58,11 +59,10 @@ class _PembayaranState extends State<Pembayaran> {
               child: ElevatedButton(
                 onPressed: () {
                   confirmDialog(
-                      widget.user.userId, jumlahPenarikanController.text);
-                  // tarikSaldo(
-                  //     widget.user.user_id, jumlahPenarikanController.text);
+                      widget.user.userId, jumlahPembayaranController.text);
+                  showNotification();
                 },
-                child: Text('Tarik'),
+                child: Text('Bayar'),
               ),
             ),
           ],
@@ -71,9 +71,49 @@ class _PembayaranState extends State<Pembayaran> {
     );
   }
 
-  tarikSaldo(String? user_id, String jumlah_tarikan) async {
+  bayar(String? user_id, String jumlah_bayar) async {
     ListUsersService _service = ListUsersService();
-    await _service.tarikSaldo(
-        int.parse(user_id!), double.parse(jumlah_tarikan));
+    await _service.bayar(int.parse(user_id!), double.parse(jumlah_bayar));
+  }
+
+  showNotification() async {
+    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+        FlutterLocalNotificationsPlugin();
+
+    const AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+
+    const DarwinInitializationSettings initializationSettingsIOS =
+        DarwinInitializationSettings(
+      requestSoundPermission: false,
+      requestBadgePermission: false,
+      requestAlertPermission: false,
+    );
+    const InitializationSettings initializationSettings =
+        InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsIOS,
+    );
+
+    await flutterLocalNotificationsPlugin.initialize(
+      initializationSettings,
+    );
+
+    AndroidNotificationChannel channel = const AndroidNotificationChannel(
+      'high channel',
+      'Very important notification!!',
+      description: 'the first notification',
+      importance: Importance.max,
+    );
+
+    await flutterLocalNotificationsPlugin.show(
+      1,
+      'Bank Undiksha',
+      'Berhasil Melakukan Pembayaran',
+      NotificationDetails(
+        android: AndroidNotificationDetails(channel.id, channel.name,
+            channelDescription: channel.description),
+      ),
+    );
   }
 }

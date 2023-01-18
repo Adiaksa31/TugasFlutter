@@ -7,6 +7,7 @@ import 'package:flutter_application_tugas/pembayaran.dart';
 import 'package:flutter_application_tugas/topup.dart';
 import 'package:flutter_application_tugas/services/user_services.dart';
 import 'package:flutter_application_tugas/transfer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class home extends StatefulWidget {
   final ListUsersModel user;
@@ -18,6 +19,25 @@ class home extends StatefulWidget {
 
 class _homeState extends State<home> {
   late int saldo = int.parse(widget.user.saldo.toString());
+
+  _sendingTel() async {
+    var url = Uri.parse("tel:081936992847");
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  _sendingSMS() async {
+    var url = Uri.parse("sms://081936992847");
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final MediaQueryHeight = MediaQuery.of(context).size.height;
@@ -331,48 +351,44 @@ class _homeState extends State<home> {
                       padding: EdgeInsets.all(10),
                       child: Center(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Container(
-                              width: MediaQueryWidth * 0.8,
-                              child: Row(
-                                children: [
-                                  Container(
-                                    width: MediaQueryWidth * 0.8,
-                                    padding: EdgeInsets.fromLTRB(10, 5, 0, 0),
-                                    child: Text(
-                                      "Saldo Anda",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 15),
-                                    ),
-                                  ),
-                                  Container(
-                                    width: MediaQueryWidth * 0.00,
-                                    child: IconButton(
-                                        onPressed: () async {
-                                          ListUsersService _service =
-                                              ListUsersService();
-                                          saldo = await _service.Saldo(
-                                              int.parse(widget.user.userId
-                                                  .toString()));
-                                          print(saldo);
-                                          setState(() {});
-                                        },
-                                        icon: Icon(Icons.refresh)),
-                                  ),
-                                ],
-                              ),
+                            Row(
+                              children: [
+                                Spacer(),
+                                SizedBox(
+                                  width: 60,
+                                ),
+                                Text(
+                                  'Saldo Anda',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15),
+                                ),
+                                Spacer(),
+                                IconButton(
+                                    onPressed: () async {
+                                      ListUsersService _service =
+                                          ListUsersService();
+                                      saldo = await _service.Saldo(int.parse(
+                                          widget.user.userId.toString()));
+                                      print(saldo);
+                                      setState(() {});
+                                    },
+                                    icon: Icon(Icons.refresh))
+                              ],
                             ),
                             Container(
                               width: MediaQueryWidth * 0.8,
                               padding: EdgeInsets.fromLTRB(10, 0, 0, 5),
                               child: Text(
-                                saldo.toString(),
+                                'Rp. ' + saldo.toString(),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(fontSize: 17),
                               ),
+                            ),
+                            SizedBox(
+                              height: 20,
                             ),
                             Container(
                                 height: MediaQueryHeight * 0.2,
@@ -511,8 +527,8 @@ class _homeState extends State<home> {
                                     )
                                   ],
                                 )),
-                            Container(
-                              height: MediaQueryHeight * 0.01,
+                            SizedBox(
+                              height: 30,
                             ),
                             Container(
                               height: MediaQueryHeight * 0.17,
@@ -521,16 +537,9 @@ class _homeState extends State<home> {
                               // color: Colors.white,
                               decoration: BoxDecoration(
                                 color: Color.fromARGB(255, 255, 255, 255),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Color.fromARGB(255, 204, 202, 202),
-                                    // spreadRadius: 5,
-                                    offset: Offset(
-                                        1, 3), // changes position of shadow
-                                  ),
-                                ],
+
                                 border: Border.all(
-                                    color: const Color(0xFF000000),
+                                    color: Color.fromARGB(255, 255, 255, 255),
                                     style: BorderStyle.solid), //Border.all
                                 /*** The BorderRadius widget  is here ***/
                                 borderRadius: BorderRadius.all(
@@ -562,48 +571,57 @@ class _homeState extends State<home> {
                         ),
                       ),
                     ),
+                    SizedBox(
+                      height: 50,
+                    ),
                     Container(
-                        color: Color.fromARGB(255, 194, 196, 199),
-                        width: MediaQueryWidth,
-                        height: MediaQueryHeight * 0.1,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              child: Column(
-                                children: [
-                                  Container(
-                                    width: MediaQueryWidth * 0.5,
-                                    padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
-                                    child: Text(
-                                      "Butuh Bantuan?",
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 15),
-                                    ),
+                      color: Color.fromARGB(255, 194, 196, 199),
+                      width: MediaQueryWidth,
+                      height: MediaQueryHeight * 0.1,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            child: Column(
+                              children: [
+                                Container(
+                                  width: MediaQueryWidth * 0.5,
+                                  padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
+                                  child: Text(
+                                    "Butuh Bantuan?",
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15),
                                   ),
-                                  Container(
-                                    padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                    child: Text(
-                                      "0878-1234-1024",
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 25),
-                                    ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                  child: Text(
+                                    "0878-1234-1024",
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 25),
                                   ),
-                                ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            child: IconButton(
+                              onPressed: _sendingTel,
+                              icon: Icon(
+                                Icons.phone,
+                                size: 50,
+                                color: Color.fromARGB(255, 0, 0, 0),
                               ),
                             ),
-                            Container(
-                              child: Icon(Icons.phone,
-                                  size: 50,
-                                  color: Color.fromARGB(255, 0, 0, 0)),
-                              padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                            ),
-                          ],
-                        )),
+                            padding: const EdgeInsets.fromLTRB(0, 0, 20, 10),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 )),
     );

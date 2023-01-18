@@ -47,21 +47,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  // AlertDialog alert = AlertDialog(
-  //   title: Text('Login Failed'),
-  //   content: Text('Try to Check your Username or Password'),
-  // );
-
-  // void _showAlertDialog(BuildContext context) {
-  //   showCupertinoModalPopup<void>(
-  //     context: context,
-  //     builder: (BuildContext context) => CupertinoAlertDialog(
-  //       title: const Text('Login Failed'),
-  //       content: const Text('Try to Check your Username or Password'),
-  //     ),
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
     final MediaQueryHeight = MediaQuery.of(context).size.height;
@@ -151,61 +136,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                                 onPressed: () async {
                                   postLogin(getUser.text, getPass.text);
-
-                                  // Navigator.pushReplacement(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //     builder: (context) => Home(),
-                                  //   ),
-                                  // );
-
-                                  // if (getUser.text == '' &&
-                                  //     getPass.text == '') {
-                                  //   Navigator.pushReplacement(
-                                  //       context,
-                                  //       MaterialPageRoute(
-                                  //           builder: (context) => home()));
-                                  // } else {
-                                  //   showDialog(
-                                  //       context: context,
-                                  //       builder: (BuildContext context) {
-                                  //         return alert;
-                                  //       });
-                                  // }
-                                  // String user = '123';
-                                  // String pass = '123';
-
-                                  // if (getUser.text.length == 0) {
-                                  //   final errorUser = SnackBar(
-                                  //     content: Text('Username tidak boleh kosong!'),
-                                  //     duration: Duration(seconds: 2),
-                                  //   );
-                                  // } else if (getPass.text.length == 0) {
-                                  //   final errorUser = SnackBar(
-                                  //     content: Text('Password tidak boleh kosong!'),
-                                  //     duration: Duration(seconds: 2),
-                                  //   );
-                                  // } else if (getUser.text == user &&
-                                  //     getPass.text == pass) {
-                                  //   final errorUser = SnackBar(
-                                  //     content: Text(
-                                  //         'Selamat datang user: ' + getUser.text),
-                                  //     duration: Duration(seconds: 2),
-                                  //   );
-
-                                  //   delay to Home page
-                                  //   Timer(Duration(seconds: 0), () {
-                                  //     Navigator.push(
-                                  //         context,
-                                  //         MaterialPageRoute(
-                                  //             builder: (context) => home()));
-                                  //   });
-                                  // } else {
-                                  //   final errorUser = SnackBar(
-                                  //     content: Text('Cek kembali input anda!'),
-                                  //     duration: Duration(seconds: 2),
-                                  //   );
-                                  // }
                                 },
                                 child: Text(
                                   "Login",
